@@ -1,0 +1,1 @@
+export type TActivePage = "Delegation" | "Wallet" | "Validators" | "Tokenomics" | "Blocks" | "Wallets" | "Transactions";
