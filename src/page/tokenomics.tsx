@@ -11,6 +11,7 @@ import {
   Filler,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import backImg from '/back.svg'
 
 ChartJS.register(
   CategoryScale,
@@ -68,13 +69,14 @@ export default function Tokenomics() {
         data: currentData.data,
         borderColor: '#22c55e',
         backgroundColor: 'rgba(34, 197, 94, 0.1)',
-        borderWidth: 3,
+        borderWidth: 4,
         fill: true,
         tension: 0.4,
         pointBackgroundColor: '#22c55e',
         pointBorderColor: '#22c55e',
-        pointRadius: 4,
-        pointHoverRadius: 6,
+        pointRadius: 5,
+        pointHoverRadius: 8,
+        pointBorderWidth: 2,
       },
     ],
   };
@@ -93,7 +95,7 @@ export default function Tokenomics() {
         borderColor: '#22c55e',
         borderWidth: 1,
         callbacks: {
-          label: function(context: any) {
+          label: function (context: any) {
             return `Supply: ${context.parsed.y.toLocaleString()} REP`;
           }
         }
@@ -122,7 +124,7 @@ export default function Tokenomics() {
           font: {
             size: 12,
           },
-          callback: function(value: any) {
+          callback: function (value: any) {
             return value.toLocaleString();
           }
         },
@@ -173,119 +175,68 @@ export default function Tokenomics() {
         </div>
 
         {/* Circular Progress Chart */}
-        <div className="mb-8">
-          <div className="bg-[#090909] rounded-lg p-8">
-            <div className="flex flex-col lg:flex-row items-center justify-between">
-              <div className="flex-1 mb-8 lg:mb-0">
-                <h3 className="text-2xl font-bold text-white mb-6">
-                  Supply Distribution
-                </h3>
-
-                {/* Circular Chart */}
-                <div className="relative w-80 h-80 mx-auto">
-                  <svg
-                    className="w-full h-full transform -rotate-90"
-                    viewBox="0 0 200 200"
-                  >
-                    {/* Background Circle */}
-                    <circle
-                      cx="100"
-                      cy="100"
-                      r="80"
-                      fill="none"
-                      stroke="#1a1a1a"
-                      strokeWidth="20"
-                    />
-                    {/* Staked Portion */}
-                    <circle
-                      cx="100"
-                      cy="100"
-                      r="80"
-                      fill="none"
-                      stroke="#22c55e"
-                      strokeWidth="20"
-                      strokeDasharray={`${stakedPercentage * 5.02} 502`}
-                      strokeDashoffset="0"
-                      strokeLinecap="round"
-                    />
-                    {/* Center Circle */}
-                    <circle
-                      cx="100"
-                      cy="100"
-                      r="50"
-                      fill="#090909"
-                      stroke="#333"
-                      strokeWidth="2"
-                    />
-                    {/* Percentage Text */}
-                    <text
-                      x="100"
-                      y="100"
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      className="text-3xl font-bold fill-white"
-                    >
-                      {stakedPercentage}%
-                    </text>
-                    <text
-                      x="100"
-                      y="120"
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      className="text-sm fill-[#A8A8A8]"
-                    >
-                      Staked
-                    </text>
-                  </svg>
-                </div>
-              </div>
-
-              {/* Chart Legend */}
-              <div className="flex-1 lg:ml-8">
-                <div className="space-y-6">
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-white rounded-full mr-4"></div>
-                    <div>
-                      <div className="text-white font-medium">
-                        Circulating Supply
-                      </div>
-                      <div className="text-[#A8A8A8] text-sm">
-                        {circulatingSupply} REP
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-green-500 rounded-full mr-4"></div>
-                    <div>
-                      <div className="text-white font-medium">
-                        Supply Staked
-                      </div>
-                      <div className="text-[#A8A8A8] text-sm">
-                        {supplyStaked} REP
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="pt-4 border-t border-[#333]">
-                    <div className="grid grid-cols-2 gap-4 text-center">
-                      <div>
-                        <div className="text-2xl font-bold text-white">
-                          {unstakedPercentage}%
-                        </div>
-                        <div className="text-sm text-[#A8A8A8]">Unstaked</div>
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold text-green-500">
-                          {stakedPercentage}%
-                        </div>
-                        <div className="text-sm text-[#A8A8A8]">Staked</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <div className="relative mb-8 bg-[#0C0C0C] rounded-lg p-8 bg-gradient-to-b from-[rgba(0,0,0,0.75)] via-[rgba(0,0,0,0.5)] to-[rgba(0,0,0,0.25)], url('/back.png') mix-blend-mode-screen">
+          {/* Circular Chart */}
+          {/* <img src={backImg} className="absolute top-0 left-0 opacity-70 h-full"/> */}
+          <div className="relative w-80 h-80 mx-auto">
+            <div className="flex justify-between text-[32px] font-light ">
+              <span>60%</span>
+              <span>40%</span>
             </div>
+            <svg
+              className="w-full h-full transform -rotate-90 -mt-5"
+              viewBox="0 0 200 200"
+            >
+              {/* Glow Filter Definitions */}
+              <defs>
+                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+                <filter id="greenGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                  <feColorMatrix in="coloredBlur" type="matrix" values="0 0 0 0 0.13  0 0 0 0 0.77  0 0 0 0 0.33  0 0 0 0.8 0" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              {/* Background Circle */}
+
+              <circle
+                cx="100"
+                cy="100"
+                r="80"
+                fill="none"
+                stroke="#FFFFFF"
+                strokeWidth="5"
+                filter="url(#glow)"
+
+              />
+              {/* Staked Portion */}
+              <circle
+                cx="100"
+                cy="100"
+                r="80"
+                fill="none"
+                stroke="#22c55e"
+                strokeWidth="5"
+                strokeDasharray={`${stakedPercentage * 5.02} 502`}
+                strokeDashoffset="0"
+                filter="url(#greenGlow)"
+              />
+            </svg>
+          </div>
+
+          <div className="absolute top-20 left-[10%]">
+            <div className="text-[24px] font-light">Circulating Supply</div>
+            <div className="text-[32px] font-medium">420,000,000 REP</div>
+            <div className="text-[24px] font-light bg-gradient-to-r from-[#7CFFB5] to-[#00FF6F] bg-clip-text text-transparent">Supply Staked</div>
+            <div className="text-[32px] font-medium bg-gradient-to-r from-[#7CFFB5] to-[#00FF6F] bg-clip-text text-transparent">168,000,000 REP</div>
           </div>
         </div>
 
@@ -301,11 +252,10 @@ export default function Tokenomics() {
                   <button
                     key={range}
                     onClick={() => setSelectedTimeRange(range)}
-                    className={`px-4 py-2 rounded text-sm font-medium ${
-                      selectedTimeRange === range
-                        ? "bg-[#0D0F0F] text-white"
-                        : "text-[#A8A8A8] hover:text-white hover:bg-[#0D0F0F]"
-                    }`}
+                    className={`px-4 py-2 rounded text-sm font-medium ${selectedTimeRange === range
+                      ? "bg-[#0D0F0F] text-white"
+                      : "text-[#A8A8A8] hover:text-white hover:bg-[#0D0F0F]"
+                      }`}
                   >
                     {range}
                   </button>
@@ -314,8 +264,15 @@ export default function Tokenomics() {
             </div>
 
             {/* Supply Trend Chart */}
-            <div className="h-80 bg-[#0D0F0F] rounded-lg p-6">
-              <Line data={chartData} options={chartOptions} />
+            <div className="h-80 bg-[#0D0F0F] rounded-lg p-6 relative">
+              {/* Glow effect overlay */}
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="w-full h-full" style={{
+                  filter: 'drop-shadow(0 0 10px rgba(34, 197, 94, 0.3)) drop-shadow(0 0 20px rgba(34, 197, 94, 0.2)) drop-shadow(0 0 30px rgba(34, 197, 94, 0.1))'
+                }}>
+                  <Line data={chartData} options={chartOptions} />
+                </div>
+              </div>
             </div>
           </div>
         </div>

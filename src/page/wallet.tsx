@@ -11,6 +11,9 @@ import {
   Filler,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import validator from "/validator.svg";
+import crypto_node from "/crypto_node.svg";
+import safe_stake from "/safe_stake.svg";
 
 ChartJS.register(
   CategoryScale,
@@ -59,21 +62,21 @@ interface DelegationAction {
 const delegationBreakdownData: DelegationBreakdown[] = [
   {
     id: 1,
-    validator: { name: "Validator X", icon: "X", color: "bg-red-500" },
+    validator: { name: "Validator X", icon: validator, color: "bg-red-500" },
     amount: "5,000 REP",
     percentage: "61%",
     stakePercentage: "61%",
   },
   {
     id: 2,
-    validator: { name: "Crypto Node", icon: "⚡", color: "bg-blue-500" },
+    validator: { name: "Crypto Node", icon: crypto_node, color: "bg-blue-500" },
     amount: "2,000 REP",
     percentage: "12%",
     stakePercentage: "24%",
   },
   {
     id: 3,
-    validator: { name: "Safe Stake", icon: "+", color: "bg-green-500" },
+    validator: { name: "Safe Stake", icon: safe_stake, color: "bg-green-500" },
     amount: "3,000 REP",
     percentage: "24%",
     stakePercentage: "15%",
@@ -108,7 +111,7 @@ const delegationActionsData: DelegationAction[] = [
   {
     id: 1,
     action: "delegated",
-    validator: { name: "Validator X", icon: "X", color: "bg-red-500" },
+    validator: { name: "Validator X", icon: validator, color: "bg-red-500" },
     amount: "+ 500 REP",
     time: "2025-07-20 14:30",
     hash: "0xb0a6...e0f5",
@@ -116,7 +119,7 @@ const delegationActionsData: DelegationAction[] = [
   {
     id: 2,
     action: "delegated",
-    validator: { name: "Crypto Node", icon: "⚡", color: "bg-blue-500" },
+    validator: { name: "Crypto Node", icon: crypto_node, color: "bg-blue-500" },
     amount: "+ 300 REP",
     time: "2025-07-19 10:00",
     hash: "0x3d6e...de8a",
@@ -124,7 +127,7 @@ const delegationActionsData: DelegationAction[] = [
   {
     id: 3,
     action: "undelegated",
-    validator: { name: "Safe Stake", icon: "+", color: "bg-green-500" },
+    validator: { name: "Safe Stake", icon: safe_stake, color: "bg-green-500" },
     amount: "+ 200 REP",
     time: "2025-07-18 13:00",
     hash: "0x3a2e...24e9",
@@ -375,12 +378,8 @@ export default function Wallet() {
                   {delegationBreakdownData.map((item) => (
                     <tr key={item.id} className="bg-[#0C0C0C] text-[#A8A8A8]">
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div
-                            className={`w-8 h-8 rounded-full ${item.validator.color} flex items-center justify-center text-white text-sm font-bold mr-3`}
-                          >
-                            {item.validator.icon}
-                          </div>
+                        <div className="flex items-center gap-2">
+                          <img src={item.validator.icon} />
                           <span className="text-sm font-medium">
                             {item.validator.name}
                           </span>
@@ -513,12 +512,8 @@ export default function Wallet() {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div
-                            className={`w-8 h-8 rounded-full ${item.validator.color} flex items-center justify-center text-white text-sm font-bold mr-3`}
-                          >
-                            {item.validator.icon}
-                          </div>
+                        <div className="flex items-center gap-2">
+                          <img src={item.validator.icon} />
                           <span className="text-sm font-medium">
                             {item.validator.name}
                           </span>
