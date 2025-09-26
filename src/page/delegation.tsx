@@ -71,12 +71,12 @@ const sampleData: DelegationData[] = [
 ];
 
 export default function Delegation() {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage] = useState(1);
   const entriesPerPage = 6;
   const totalPages = 138843;
 
   return (
-    <div className="min-h-screen text-white p-6">
+    <div className="text-white p-6">
       <div className="px-8 mx-auto">
         
         {/* Table */}

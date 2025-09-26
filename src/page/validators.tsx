@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface ValidatorData {
   id: number;
@@ -148,6 +149,7 @@ const validatorsData: ValidatorData[] = [
 ];
 
 export default function Validators() {
+  const navigate = useNavigate();
   const [currentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const entriesPerPage = 10;
@@ -156,6 +158,11 @@ export default function Validators() {
   const filteredValidators = validatorsData.filter(validator =>
     validator.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Handle validator row click
+  const handleValidatorClick = (validatorId: number) => {
+    navigate(`/validators/${validatorId}`);
+  };
 
   return (
     <div className="min-h-screen text-white p-6 bg-[#050607]">
@@ -202,7 +209,11 @@ export default function Validators() {
               </thead>
               <tbody className="">
                 {filteredValidators.map((validator) => (
-                  <tr key={validator.id} className="bg-[#0C0C0C] text-[#A8A8A8]">
+                  <tr 
+                    key={validator.id} 
+                    className="bg-[#0C0C0C] text-[#A8A8A8] hover:bg-[#1a1a1a] cursor-pointer transition-colors"
+                    onClick={() => handleValidatorClick(validator.id)}
+                  >
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                       {validator.rank}
                     </td>

@@ -5,6 +5,7 @@ import Delegation from './page/delegation'
 import Wallet from './page/wallet'
 import Tokenomics from './page/tokenomics'
 import Validators from './page/validators'
+import ValidatorDetail from './page/validator-detail'
 import Blocks from './page/blocks'
 import Transfers from './page/transfers'
 import Wallets from './page/wallets'
@@ -19,6 +20,7 @@ function App() {
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/tokenomics" element={<Tokenomics />} />
           <Route path="/validators" element={<Validators />} />
+          <Route path="/validators/:id" element={<ValidatorDetail />} />
           <Route path="/blocks" element={<Blocks />} />
           <Route path="/transfers" element={<Transfers />} />
           <Route path="/wallets" element={<Wallets />} />
