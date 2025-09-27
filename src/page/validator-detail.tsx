@@ -2,6 +2,13 @@ import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import activeIcon from "/active.svg";
 import infoIcon from "/info.svg";
+import { RiTimer2Fill } from "react-icons/ri";
+import { IoGiftSharp } from "react-icons/io5";
+import { BsBarChartLineFill } from "react-icons/bs";
+import { IoHammerSharp } from "react-icons/io5";
+import { CgShapeHexagon } from "react-icons/cg";
+import { BsFillGrid3X3GapFill } from "react-icons/bs";
+import { FaLocationArrow } from "react-icons/fa";
 
 interface ValidatorDetailData {
   id: number;
@@ -75,7 +82,15 @@ export default function ValidatorDetail() {
   const [rowsPerPage, setRowsPerPage] = useState(100);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const tabs = ['Performance', 'Staked', 'Rewards', 'Jobs History', 'Blocks Mined', 'Slashing', 'Benchmarks'];
+  const tabs = [
+    { tab: 'Performance', icon: <RiTimer2Fill size={16} /> },
+    { tab: 'Staked', icon: <BsFillGrid3X3GapFill size={16} /> },
+    { tab: 'Rewards', icon: <IoGiftSharp size={16} /> },
+    { tab: 'Jobs History', icon: <CgShapeHexagon size={16} /> },
+    { tab: 'Blocks Mined', icon: <IoHammerSharp size={16} /> },
+    { tab: 'Slashing', icon: <FaLocationArrow size={16} /> },
+    { tab: 'Benchmarks', icon: <BsBarChartLineFill size={16} /> }
+  ];
   const rowOptions = [1, 25, 50, 100];
 
   // Mock data - in real app, fetch based on id
@@ -155,7 +170,7 @@ export default function ValidatorDetail() {
                 <div className="text-[#939494] text-[15px] font-bold mb-2">Total Stake Weight</div>
                 <div className="text-3xl text-white font-bold">{validator.totalStakeWeight}</div>
               </div>
-              <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+              <span className="bg-gradient-to-b from-[#7CFFB5] to-[#00FF6F] text-black px-3 py-1 rounded-full text-sm font-medium">
                 Rank #{validator.rank}
               </span>
             </div>
@@ -190,16 +205,18 @@ export default function ValidatorDetail() {
 
         {/* Navigation Tabs */}
         <div className="mb-6">
-          <div className="flex gap-1 bg-[#0C0C0C] rounded-lg p-1">
-            {tabs.map((tab) => (
+          <div className="flex gap-2 rounded-lg p-1">
+            {tabs.map(({tab, icon}: {tab: string, icon: React.ReactNode}) => (
+              
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === tab
-                  ? 'bg-green-500 text-white'
-                  : 'text-[#A8A8A8] hover:text-white hover:bg-[#090909]'
+                className={`px-4 py-2 flex items-center rounded-[12px] gap-2 text-sm font-medium transition-colors ${activeTab === tab
+                  ? 'bg-gradient-to-b from-[#7CFFB5] to-[#00FF6F]  text-black'
+                  : 'text-[#939494] bg-[#0C0C0C] border-[0.2px] border-[#5E5E5E40]  hover:text-white hover:bg-[#090909]'
                   }`}
               >
+                {icon}
                 {tab}
               </button>
             ))}
@@ -221,7 +238,7 @@ export default function ValidatorDetail() {
                     key={option}
                     onClick={() => setRowsPerPage(option)}
                     className={`px-3 py-1 rounded text-sm font-medium ${rowsPerPage === option
-                      ? 'bg-green-500 text-white'
+                      ? 'bg-gradient-to-b from-[#7CFFB5] to-[#00FF6F] text-black'
                       : 'text-[#A8A8A8] hover:text-white hover:bg-[#0C0C0C]'
                       }`}
                   >
@@ -299,7 +316,7 @@ export default function ValidatorDetail() {
               >
                 Previous
               </button>
-              <button className="px-3 py-1 text-sm bg-green-500 text-white rounded">
+              <button className="px-3 py-1 text-sm bg-[#333333] text-white rounded">
                 {currentPage}
               </button>
               <button
